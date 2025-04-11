@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -52,44 +53,64 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
-				sidebar: {
-					DEFAULT: 'hsl(var(--sidebar-background))',
-					foreground: 'hsl(var(--sidebar-foreground))',
-					primary: 'hsl(var(--sidebar-primary))',
-					'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
-					accent: 'hsl(var(--sidebar-accent))',
-					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
-					border: 'hsl(var(--sidebar-border))',
-					ring: 'hsl(var(--sidebar-ring))'
-				}
+				// Custom colors
+				charcoal: {
+					DEFAULT: '#1A1F2C',
+					dark: '#222222',
+				},
+				purple: {
+					light: '#5b4b7d',
+					DEFAULT: '#3a2a4e',
+					dark: '#2a1a3e',
+				},
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
 				md: 'calc(var(--radius) - 2px)',
-				sm: 'calc(var(--radius) - 4px)'
+				sm: 'calc(var(--radius) - 4px)',
+				xl: '16px',
+				'2xl': '24px',
 			},
 			keyframes: {
 				'accordion-down': {
-					from: {
-						height: '0'
-					},
-					to: {
-						height: 'var(--radix-accordion-content-height)'
-					}
+					from: { height: '0' },
+					to: { height: 'var(--radix-accordion-content-height)' }
 				},
 				'accordion-up': {
-					from: {
-						height: 'var(--radix-accordion-content-height)'
+					from: { height: 'var(--radix-accordion-content-height)' },
+					to: { height: '0' }
+				},
+				'fade-in': {
+					'0%': { opacity: '0', transform: 'translateY(20px)' },
+					'100%': { opacity: '1', transform: 'translateY(0)' }
+				},
+				'glow-pulse': {
+					'0%, 100%': { 
+						textShadow: '0 0 10px #5b4b7d, 0 0 20px #5b4b7d'
 					},
-					to: {
-						height: '0'
-					}
-				}
+					'50%': { 
+						textShadow: '0 0 15px #5b4b7d, 0 0 30px #5b4b7d'
+					},
+				},
+				'float': {
+					'0%, 100%': { transform: 'translateY(0)' },
+					'50%': { transform: 'translateY(-10px)' },
+				},
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
-			}
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'fade-in': 'fade-in 1s ease-out forwards',
+				'fade-in-delay-1': 'fade-in 1s 0.2s ease-out forwards',
+				'fade-in-delay-2': 'fade-in 1s 0.4s ease-out forwards',
+				'fade-in-delay-3': 'fade-in 1s 0.6s ease-out forwards',
+				'glow-pulse': 'glow-pulse 3s infinite',
+				'float': 'float 6s ease-in-out infinite',
+			},
+			fontFamily: {
+				'barlow': ['Barlow Condensed', 'sans-serif'],
+				'inter': ['Inter', 'sans-serif'],
+			},
 		}
 	},
 	plugins: [require("tailwindcss-animate")],
