@@ -1,83 +1,117 @@
 
 import { useState, useEffect } from 'react';
-import { Menu, X, Info, Clock, Users, Image, BookOpen } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 
 const Navigation = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  
+  const navLinks = [
+    { name: 'Introduction', href: '#introduction' },
+    { name: 'Causes', href: '#causes' },
+    { name: 'Timeline', href: '#timeline' },
+    { name: 'Figures', href: '#figures' },
+    { name: 'Gallery', href: '#gallery' },
+    { name: 'Legacy', href: '#legacy' }
+  ];
+  
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 50) {
-        setScrolled(true);
+        setIsScrolled(true);
       } else {
-        setScrolled(false);
+        setIsScrolled(false);
       }
     };
-
+    
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  const navLinks = [
-    { name: 'Introduction', href: '#introduction', icon: <Info size={18} /> },
-    { name: 'Causes', href: '#causes', icon: <BookOpen size={18} /> },
-    { name: 'Timeline', href: '#timeline', icon: <Clock size={18} /> },
-    { name: 'Key Figures', href: '#figures', icon: <Users size={18} /> },
-    { name: 'Gallery', href: '#gallery', icon: <Image size={18} /> },
-  ];
-
+  
   return (
-    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-charcoal-dark/90 backdrop-blur-md py-3 shadow-lg' : 'bg-transparent py-5'}`}>
-      <div className="container mx-auto flex justify-between items-center px-4">
-        <a href="#" className="text-white font-barlow text-xl tracking-wider">
-          <span className="text-purple-light">R</span>evolution
-        </a>
-
-        {/* Desktop Menu */}
-        <div className="hidden md:flex space-x-8">
-          {navLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
-              className="text-gray-300 hover:text-purple-light flex items-center space-x-1 transition-colors duration-300"
-            >
-              {link.icon}
-              <span>{link.name}</span>
-            </a>
-          ))}
-        </div>
-
-        {/* Mobile Menu Button */}
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden text-white hover:text-purple-light transition-colors duration-300"
-        >
-          {isOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
-      </div>
-
-      {/* Mobile Menu */}
-      <div
-        className={`fixed inset-0 bg-charcoal/95 backdrop-blur-lg transition-transform duration-300 ease-in-out z-40 ${
-          isOpen ? 'translate-x-0' : 'translate-x-full'
-        } md:hidden flex flex-col items-center justify-center`}
+    <>
+      <nav 
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          isScrolled 
+            ? 'bg-charcoal-dark/80 backdrop-blur-md py-3 shadow-lg' 
+            : 'bg-transparent py-5'
+        }`}
       >
-        <div className="flex flex-col space-y-8 items-center">
-          {navLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
-              onClick={() => setIsOpen(false)}
-              className="text-gray-200 hover:text-purple-light text-xl flex items-center space-x-2 transition-all duration-300 hover:scale-105"
-            >
-              {link.icon}
-              <span>{link.name}</span>
+        <div className="container mx-auto px-4 flex justify-between items-center">
+          <a href="#" className="font-barlow text-xl tracking-wider text-glow">
+            <span className="text-purple-light">RUSSIAN</span> REVOLUTION
+          </a>
+          
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex space-x-8">
+            {navLinks.map((link) => (
+              <a 
+                key={link.name}
+                href={link.href}
+                className="text-gray-300 hover:text-purple-light transition-colors duration-300"
+              >
+                {link.name}
+              </a>
+            ))}
+          </div>
+          
+          {/* Mobile Menu Button */}
+          <button 
+            className="md:hidden text-gray-300 hover:text-purple-light transition-colors duration-300"
+            onClick={() => setMobileMenuOpen(true)}
+          >
+            <Menu size={24} />
+          </button>
+        </div>
+      </nav>
+      
+      {/* Mobile Navigation Menu */}
+      <div 
+        className={`fixed inset-0 z-50 bg-charcoal-dark/90 backdrop-blur-lg transform transition-transform duration-300 ${
+          mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
+        }`}
+      >
+        <div className="container mx-auto px-4 py-8">
+          <div className="flex justify-between items-center mb-8">
+            <a href="#" className="font-barlow text-xl tracking-wider text-glow">
+              <span className="text-purple-light">RUSSIAN</span> REVOLUTION
             </a>
-          ))}
+            <button 
+              className="text-gray-300 hover:text-purple-light transition-colors duration-300"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              <X size={24} />
+            </button>
+          </div>
+          
+          <div className="flex flex-col space-y-6">
+            {navLinks.map((link) => (
+              <a 
+                key={link.name}
+                href={link.href}
+                className="text-gray-300 hover:text-purple-light transition-colors duration-300 text-2xl font-barlow"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {link.name}
+              </a>
+            ))}
+          </div>
+          
+          <div className="mt-16">
+            <div className="glass-card p-4 flex items-center">
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/1917_October_Revolution_Red_guard_Petrograd.jpg/600px-1917_October_Revolution_Red_guard_Petrograd.jpg"
+                alt="Red Guards in Petrograd during the October Revolution"
+                className="w-16 h-16 rounded-full object-cover mr-4"
+              />
+              <p className="text-sm text-gray-300">
+                Red Guards in Petrograd during the October Revolution, 1917
+              </p>
+            </div>
+          </div>
         </div>
       </div>
-    </nav>
+    </>
   );
 };
 
