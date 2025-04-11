@@ -1,5 +1,6 @@
 
 import { useEffect, useState } from 'react';
+import { Flag, Star, Sword } from 'lucide-react';
 
 const Header = () => {
   const [loaded, setLoaded] = useState(false);
@@ -13,13 +14,21 @@ const Header = () => {
       <div className="absolute inset-0 bg-gradient-to-b from-charcoal to-charcoal-dark z-0"></div>
       <div className="absolute inset-0 bg-purple-dark/10 z-0"></div>
       
-      {/* Background image with overlay */}
-      <div className="absolute inset-0 z-0 opacity-20">
-        <img 
-          src="https://images.unsplash.com/photo-1494891848038-7bd202a2afeb" 
-          alt="Historical background" 
-          className="w-full h-full object-cover"
-        />
+      {/* Background pattern with icons instead of image */}
+      <div className="absolute inset-0 z-0 opacity-10">
+        <div className="absolute inset-0 grid grid-cols-6 grid-rows-6 gap-8 p-8">
+          {Array.from({ length: 12 }).map((_, index) => (
+            <div key={index} className="flex items-center justify-center">
+              {index % 3 === 0 ? (
+                <Flag size={48} className="text-purple-light" />
+              ) : index % 3 === 1 ? (
+                <Star size={48} className="text-purple-light" />
+              ) : (
+                <Sword size={48} className="text-purple-light" />
+              )}
+            </div>
+          ))}
+        </div>
       </div>
       
       <div className="z-10 text-center px-4">

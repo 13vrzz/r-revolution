@@ -1,63 +1,63 @@
 
 import { useState, useEffect, useRef } from 'react';
-import { X } from 'lucide-react';
+import { X, Camera, Book, Flag, Award, Landmark, Archive, Globe, Map, FileText } from 'lucide-react';
 
-interface GalleryImage {
-  src: string;
+interface GalleryItem {
+  icon: React.ReactNode;
   alt: string;
-  caption?: string;
+  caption: string;
 }
 
 const Gallery = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [lightboxOpen, setLightboxOpen] = useState(false);
-  const [currentImage, setCurrentImage] = useState(0);
+  const [currentItem, setCurrentItem] = useState(0);
   
-  const images: GalleryImage[] = [
+  const items: GalleryItem[] = [
     {
-      src: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/19171107_Lenin-Smolny-by-Nikitin.jpg/800px-19171107_Lenin-Smolny-by-Nikitin.jpg",
-      alt: "Lenin at Smolny Institute",
-      caption: "Lenin at Smolny Institute, the Bolshevik headquarters during the October Revolution, 1917."
+      icon: <Flag size={64} className="text-purple-light" />,
+      alt: "Revolutionary flag",
+      caption: "The flag became a powerful symbol during the Russian Revolution, representing the workers' movement."
     },
     {
-      src: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Trotsky-lenin-zinoviev-kalinin-kamenev-pre-congress-1920.jpg/800px-Trotsky-lenin-zinoviev-kalinin-kamenev-pre-congress-1920.jpg",
-      alt: "Bolshevik leaders",
-      caption: "Bolshevik leaders: Trotsky, Lenin, Zinoviev, Kalinin, and Kamenev, 1920."
+      icon: <Book size={64} className="text-purple-light" />,
+      alt: "Revolutionary literature",
+      caption: "Revolutionary literature, including Lenin's writings, played a crucial role in spreading Bolshevik ideas."
     },
     {
-      src: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Russian_Provisional_Government_1917.jpg/800px-Russian_Provisional_Government_1917.jpg",
-      alt: "Russian Provisional Government",
-      caption: "Members of the Russian Provisional Government, 1917."
+      icon: <Camera size={64} className="text-purple-light" />,
+      alt: "Documentary photography",
+      caption: "Photography documented key moments of the revolution, becoming powerful historical records."
     },
     {
-      src: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Tsar_Nicholas_II_-reviewing_the_troops_1916.jpg/800px-Tsar_Nicholas_II_-reviewing_the_troops_1916.jpg",
-      alt: "Tsar Nicholas II reviewing troops",
-      caption: "Tsar Nicholas II reviewing troops during World War I, 1916."
+      icon: <Globe size={64} className="text-purple-light" />,
+      alt: "Global impact",
+      caption: "The Russian Revolution had a profound impact on global politics and inspired revolutionary movements worldwide."
     },
     {
-      src: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Red_Army_soldiers_1919.jpg/800px-Red_Army_soldiers_1919.jpg",
-      alt: "Red Army soldiers",
-      caption: "Red Army soldiers during the Russian Civil War, 1919."
+      icon: <Landmark size={64} className="text-purple-light" />,
+      alt: "Winter Palace",
+      caption: "The storming of the Winter Palace became an iconic moment in the October Revolution."
     },
     {
-      src: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/19191007-lenin_second_anniversary_october_revolution_speech_red_square.jpg/800px-19191007-lenin_second_anniversary_october_revolution_speech_red_square.jpg",
-      alt: "Lenin speech in Red Square",
-      caption: "Lenin giving a speech in Red Square on the second anniversary of the October Revolution, 1919."
+      icon: <Archive size={64} className="text-purple-light" />,
+      alt: "Historical archives",
+      caption: "Archives preserve countless documents and artifacts from the revolutionary period."
     },
     {
-      src: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Romanov_family_1913.jpg/800px-Romanov_family_1913.jpg",
-      alt: "Romanov family",
-      caption: "The Romanov family in 1913, four years before the revolution."
+      icon: <Award size={64} className="text-purple-light" />,
+      alt: "Imperial symbols",
+      caption: "Imperial symbols were rejected and replaced with new Soviet emblems after the revolution."
     },
     {
-      src: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/Saint_Petersburg_1917.jpg/800px-Saint_Petersburg_1917.jpg",
-      alt: "Petrograd demonstrations",
-      caption: "Demonstrations in Petrograd (St. Petersburg) during the February Revolution, 1917."
+      icon: <Map size={64} className="text-purple-light" />,
+      alt: "Map of revolutionary Russia",
+      caption: "Maps from the period show the changing territories during the revolutionary years and civil war."
     },
     {
-      src: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Protopopov_1916_in_cabinet_and_duma.jpg/800px-Protopopov_1916_in_cabinet_and_duma.jpg",
-      alt: "Imperial Russian cabinet and Duma",
-      caption: "Imperial Russian cabinet and Duma (parliament) meeting, 1916."
+      icon: <FileText size={64} className="text-purple-light" />,
+      alt: "Revolutionary decrees",
+      caption: "The first decrees of the Soviet government addressed peace, land reform, and workers' rights."
     }
   ];
   
@@ -84,7 +84,7 @@ const Gallery = () => {
   }, []);
   
   const openLightbox = (index: number) => {
-    setCurrentImage(index);
+    setCurrentItem(index);
     setLightboxOpen(true);
     document.body.style.overflow = 'hidden';
   };
@@ -94,9 +94,9 @@ const Gallery = () => {
     document.body.style.overflow = 'auto';
   };
   
-  const navigateImage = (direction: number) => {
-    const newIndex = (currentImage + direction + images.length) % images.length;
-    setCurrentImage(newIndex);
+  const navigateItem = (direction: number) => {
+    const newIndex = (currentItem + direction + items.length) % items.length;
+    setCurrentItem(newIndex);
   };
   
   // Handle keyboard navigation
@@ -105,13 +105,13 @@ const Gallery = () => {
       if (!lightboxOpen) return;
       
       if (e.key === 'Escape') closeLightbox();
-      if (e.key === 'ArrowRight') navigateImage(1);
-      if (e.key === 'ArrowLeft') navigateImage(-1);
+      if (e.key === 'ArrowRight') navigateItem(1);
+      if (e.key === 'ArrowLeft') navigateItem(-1);
     };
     
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [lightboxOpen, currentImage]);
+  }, [lightboxOpen, currentItem]);
   
   return (
     <section id="gallery" className="section-container bg-charcoal relative">
@@ -123,21 +123,20 @@ const Gallery = () => {
         <h2 className="section-title">Historical Gallery</h2>
         
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mt-12">
-          {images.map((image, index) => (
+          {items.map((item, index) => (
             <div 
               key={index}
-              className="glass-card overflow-hidden cursor-pointer group"
+              className="glass-card overflow-hidden cursor-pointer group flex items-center justify-center p-8"
               onClick={() => openLightbox(index)}
             >
-              <div className="aspect-w-16 aspect-h-12 overflow-hidden relative">
-                <img 
-                  src={image.src} 
-                  alt={image.alt} 
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                />
+              <div className="aspect-w-16 aspect-h-12 overflow-hidden relative flex flex-col items-center">
+                {item.icon}
+                <div className="mt-4 text-center">
+                  <p className="text-sm text-gray-200">{item.alt}</p>
+                </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-charcoal-dark to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
-                  <div className="p-4 w-full">
-                    <p className="text-sm text-gray-200 line-clamp-2">{image.caption || image.alt}</p>
+                  <div className="p-4 w-full text-center">
+                    <p className="text-sm text-gray-200 line-clamp-2">{item.caption}</p>
                   </div>
                 </div>
               </div>
@@ -157,30 +156,26 @@ const Gallery = () => {
             
             <button 
               className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white z-10 p-3 rounded-full bg-charcoal/50 hover:bg-purple/30 transition-colors duration-300"
-              onClick={() => navigateImage(-1)}
+              onClick={() => navigateItem(-1)}
             >
               &larr;
             </button>
             
             <button 
               className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white z-10 p-3 rounded-full bg-charcoal/50 hover:bg-purple/30 transition-colors duration-300"
-              onClick={() => navigateImage(1)}
+              onClick={() => navigateItem(1)}
             >
               &rarr;
             </button>
             
             <div className="max-w-5xl max-h-[80vh] w-full flex flex-col items-center animate-fade-in">
-              <div className="relative w-full max-h-[70vh] overflow-hidden">
-                <img 
-                  src={images[currentImage].src} 
-                  alt={images[currentImage].alt}
-                  className="mx-auto max-h-[70vh] max-w-full object-contain"
-                />
+              <div className="relative flex items-center justify-center h-64 mb-8">
+                {items[currentItem].icon}
               </div>
               
               <div className="glass-card p-4 mt-4 w-full">
-                <p className="text-center text-gray-100">{images[currentImage].caption || images[currentImage].alt}</p>
-                <p className="text-center text-sm text-gray-400 mt-2">{currentImage + 1} / {images.length}</p>
+                <p className="text-center text-gray-100">{items[currentItem].caption}</p>
+                <p className="text-center text-sm text-gray-400 mt-2">{currentItem + 1} / {items.length}</p>
               </div>
             </div>
           </div>

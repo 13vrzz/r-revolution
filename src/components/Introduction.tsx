@@ -1,5 +1,6 @@
 
 import { useEffect, useRef } from 'react';
+import { Book, Globe, History } from 'lucide-react';
 
 const Introduction = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -31,15 +32,6 @@ const Introduction = () => {
       <div className="absolute inset-0 bg-gradient-to-b from-charcoal to-charcoal-dark z-0"></div>
       <div className="absolute inset-0 bg-purple/10 z-0"></div>
       
-      {/* Background image with overlay */}
-      <div className="absolute inset-0 z-0 opacity-10">
-        <img 
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Soviet-Union-1927-1956.jpg/800px-Soviet-Union-1927-1956.jpg" 
-          alt="Soviet Russia Map" 
-          className="w-full h-full object-cover"
-        />
-      </div>
-      
       <div 
         ref={sectionRef} 
         className="container mx-auto z-10 opacity-0 translate-y-10 transition-all duration-1000"
@@ -60,20 +52,16 @@ const Introduction = () => {
             </p>
           </div>
           
-          {/* Image */}
-          <div className="glass-card overflow-hidden">
-            <div className="relative h-full">
-              <img 
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Lenin_addressing_a_crowd.jpg/800px-Lenin_addressing_a_crowd.jpg" 
-                alt="Lenin addressing a crowd during the revolution" 
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-charcoal-dark to-transparent">
-                <p className="text-sm text-gray-300">
-                  Vladimir Lenin addressing a crowd in Petrograd (now St. Petersburg), 1917.
-                </p>
-              </div>
+          {/* Icon display instead of image */}
+          <div className="glass-card p-8 flex flex-col items-center justify-center">
+            <div className="relative h-48 w-48 flex items-center justify-center mb-6">
+              <History size={120} className="text-purple-light opacity-80" />
+              <Globe size={64} className="text-purple-light opacity-60 absolute top-0 right-0" />
+              <Book size={64} className="text-purple-light opacity-60 absolute bottom-0 left-0" />
             </div>
+            <p className="text-center text-sm text-gray-300">
+              The revolution transformed global politics and inspired revolutionary movements worldwide.
+            </p>
           </div>
         </div>
         

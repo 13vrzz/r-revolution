@@ -1,5 +1,6 @@
 
 import { useEffect, useRef } from 'react';
+import { Globe, BookOpen, Landmark } from 'lucide-react';
 
 const Legacy = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -31,13 +32,21 @@ const Legacy = () => {
       <div className="absolute inset-0 bg-gradient-to-b from-charcoal to-charcoal-dark z-0"></div>
       <div className="absolute inset-0 bg-purple/10 z-0"></div>
       
-      {/* Background image with overlay */}
-      <div className="absolute inset-0 z-0 opacity-10">
-        <img 
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Lenin_and_stalin-crop.jpg/800px-Lenin_and_stalin-crop.jpg" 
-          alt="Historical background" 
-          className="w-full h-full object-cover"
-        />
+      {/* Background pattern with icons */}
+      <div className="absolute inset-0 z-0 opacity-5">
+        <div className="grid grid-cols-4 grid-rows-4 gap-16 p-8">
+          {Array.from({ length: 16 }).map((_, index) => (
+            <div key={index} className="flex items-center justify-center">
+              {index % 3 === 0 ? (
+                <Globe size={64} className="text-purple-light" />
+              ) : index % 3 === 1 ? (
+                <BookOpen size={64} className="text-purple-light" />
+              ) : (
+                <Landmark size={64} className="text-purple-light" />
+              )}
+            </div>
+          ))}
+        </div>
       </div>
       
       <div 
@@ -60,18 +69,27 @@ const Legacy = () => {
         
         <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="glass-card p-6 animate-float">
-            <h3 className="font-barlow text-xl font-semibold mb-3 text-glow-purple">Political Legacy</h3>
-            <p className="text-gray-300">Introduction of a one-party state model that influenced communist systems worldwide, from China to Cuba.</p>
+            <div className="flex justify-center mb-4">
+              <Landmark size={48} className="text-purple-light" />
+            </div>
+            <h3 className="font-barlow text-xl font-semibold mb-3 text-glow-purple text-center">Political Legacy</h3>
+            <p className="text-gray-300 text-center">Introduction of a one-party state model that influenced communist systems worldwide, from China to Cuba.</p>
           </div>
           
           <div className="glass-card p-6 animate-float [animation-delay:1s]">
-            <h3 className="font-barlow text-xl font-semibold mb-3 text-glow-purple">Economic Legacy</h3>
-            <p className="text-gray-300">Implementation of a centrally planned economy that challenged market capitalism and influenced economic policies globally.</p>
+            <div className="flex justify-center mb-4">
+              <Globe size={48} className="text-purple-light" />
+            </div>
+            <h3 className="font-barlow text-xl font-semibold mb-3 text-glow-purple text-center">Economic Legacy</h3>
+            <p className="text-gray-300 text-center">Implementation of a centrally planned economy that challenged market capitalism and influenced economic policies globally.</p>
           </div>
           
           <div className="glass-card p-6 animate-float [animation-delay:2s]">
-            <h3 className="font-barlow text-xl font-semibold mb-3 text-glow-purple">Cultural Legacy</h3>
-            <p className="text-gray-300">Revolutionary aesthetics and propaganda techniques that influenced art, film, and design throughout the 20th century.</p>
+            <div className="flex justify-center mb-4">
+              <BookOpen size={48} className="text-purple-light" />
+            </div>
+            <h3 className="font-barlow text-xl font-semibold mb-3 text-glow-purple text-center">Cultural Legacy</h3>
+            <p className="text-gray-300 text-center">Revolutionary aesthetics and propaganda techniques that influenced art, film, and design throughout the 20th century.</p>
           </div>
         </div>
       </div>

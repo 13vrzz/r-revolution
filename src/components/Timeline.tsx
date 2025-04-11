@@ -1,11 +1,12 @@
 
 import { useEffect, useRef, useState } from 'react';
+import { Calendar, Flag, Users, MapPin, Landmark, Target, Swords } from 'lucide-react';
 
 interface TimelineEvent {
   year: string;
   title: string;
   description: string;
-  image?: string;
+  icon: React.ReactNode;
 }
 
 const Timeline = () => {
@@ -17,37 +18,37 @@ const Timeline = () => {
       year: "1905",
       title: "Bloody Sunday & First Revolution",
       description: "Peaceful protestors were fired upon by Imperial forces, triggering the first Russian Revolution. Tsar Nicholas II agreed to create the State Duma, Russia's first elected legislature.",
-      image: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/1905_Russian_Revolution_-_Bloody_Sunday.jpg/800px-1905_Russian_Revolution_-_Bloody_Sunday.jpg"
+      icon: <Users size={48} className="text-purple-light" />
     },
     {
       year: "Feb 1917",
       title: "February Revolution",
       description: "Food shortages and worker strikes in Petrograd escalated into a revolution. The Tsar abdicated and a Provisional Government was formed.",
-      image: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Russian_Revolution_of_1917_-_Government_troops_and_revolutionaries.jpg/800px-Russian_Revolution_of_1917_-_Government_troops_and_revolutionaries.jpg"
+      icon: <Flag size={48} className="text-purple-light" />
     },
     {
       year: "Apr 1917",
       title: "Lenin Returns to Russia",
       description: "Vladimir Lenin returned from exile, publishing his 'April Theses' calling for 'Peace, Land, and Bread' and 'All Power to the Soviets.'",
-      image: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/Lenin-arrives-at-Finland-Station-in-1917.jpg/800px-Lenin-arrives-at-Finland-Station-in-1917.jpg"
+      icon: <MapPin size={48} className="text-purple-light" />
     },
     {
       year: "Jul 1917",
       title: "July Days",
       description: "Failed Bolshevik uprising in Petrograd led to Lenin fleeing to Finland and other Bolshevik leaders being arrested.",
-      image: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/July_Days_in_Petrograd%2C_July_1917.jpg/800px-July_Days_in_Petrograd%2C_July_1917.jpg"
+      icon: <Calendar size={48} className="text-purple-light" />
     },
     {
       year: "Oct 1917",
       title: "October Revolution",
       description: "Bolsheviks led by Lenin seized power from the Provisional Government. The Winter Palace was stormed and the Soviet government was established.",
-      image: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/19171025_Taking_the_Winter_Palace_%28Kazimir_Malevich_and_Iurii_Pimenov%29.jpg/800px-19171025_Taking_the_Winter_Palace_%28Kazimir_Malevich_and_Iurii_Pimenov%29.jpg"
+      icon: <Landmark size={48} className="text-purple-light" />
     },
     {
       year: "1918-22",
       title: "Civil War",
       description: "The Red Army (Bolsheviks) fought against the White Army (anti-Bolshevik forces). The war ended with a Bolshevik victory, leading to the formation of the Soviet Union in 1922.",
-      image: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Russian_Civil_War%2C_Western_front.jpg/800px-Russian_Civil_War%2C_Western_front.jpg"
+      icon: <Swords size={48} className="text-purple-light" />
     },
   ];
   
@@ -102,15 +103,9 @@ const Timeline = () => {
               
               {/* Content */}
               <div className="glass-card overflow-hidden transition-all duration-300 hover:shadow-[0_0_25px_rgba(91,75,125,0.3)]">
-                {event.image && (
-                  <div className="w-full h-48 overflow-hidden">
-                    <img 
-                      src={event.image} 
-                      alt={event.title}
-                      className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
-                    />
-                  </div>
-                )}
+                <div className="w-full h-48 flex items-center justify-center bg-charcoal-dark/50">
+                  {event.icon}
+                </div>
                 <div className="p-5">
                   <div className="text-purple-light font-barlow font-bold text-xl mb-1">{event.year}</div>
                   <h3 className="font-barlow text-2xl mb-3">{event.title}</h3>

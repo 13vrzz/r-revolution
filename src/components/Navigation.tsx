@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Flag, BookOpen } from 'lucide-react';
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -98,15 +98,9 @@ const Navigation = () => {
           </div>
           
           <div className="mt-16">
-            <div className="glass-card p-4 flex items-center">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/1917_October_Revolution_Red_guard_Petrograd.jpg/600px-1917_October_Revolution_Red_guard_Petrograd.jpg"
-                alt="Red Guards in Petrograd during the October Revolution"
-                className="w-16 h-16 rounded-full object-cover mr-4"
-              />
-              <p className="text-sm text-gray-300">
-                Red Guards in Petrograd during the October Revolution, 1917
-              </p>
+            <div className="glass-card p-6 flex items-center justify-center">
+              <Flag size={48} className="text-purple-light mr-4" />
+              <BookOpen size={48} className="text-purple-light" />
             </div>
           </div>
         </div>
